@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+  - name: create directory
+    file:
+      path: "/home/ec2-user/.ssh"
+      state: directory
+  - name: create empty file
+    file:
+      path: "/home/ec2-user/.ssh/authorized_keys"
+      state: touch
+  - name: put pubkey
+    lineinfile:
+      path: "/home/ec2-user/.ssh/authorized_keys"
+      line: "{{ pubkey }}"
